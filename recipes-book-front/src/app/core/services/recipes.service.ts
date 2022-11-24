@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { Recipe } from '../model/recipe.model';
 import { catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
@@ -13,12 +13,18 @@ const BASE_PATH = environment.basePath
 export class RecipesService {
 
   //The reactive pattern for fetching data 
-  recipe$ = this.http.get<Recipe[]>(`${BASE_PATH}/recipes`)
+  recipes$ = this.http.get<Recipe[]>(`${BASE_PATH}/recipes`)
   .pipe(
     catchError(error => 
       of([])
     ))
   ;
+
+  //Create the action stream
+  private filterRecipeSubject = new BehaviorSubject<Recipe>({title: ""});
+  //Extract the readonly stream
+  filterRecipesAction$ = this.filterRecipeSubject.asObservable();
+
 
   constructor(private http: HttpClient) { }
 
@@ -26,4 +32,8 @@ export class RecipesService {
   /* getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`${BASE_PATH}/recipes`);
   } */
+
+  updateFilter(criteria: Recipe) {
+    this.filterRecipeSubject.next(criteria);
+  }
 }

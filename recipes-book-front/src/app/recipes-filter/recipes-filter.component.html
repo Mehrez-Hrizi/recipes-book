@@ -1,0 +1,26 @@
+<div class="rp-filters">
+    <form [formGroup]="recipeForm">
+        <fieldset class="rp-filters-group">
+            <legend>Filters</legend>
+            <div class="rp-filter-button">
+                <p-button (onClick)="clearFilter()" label="Clear all"></p-button>
+            </div>
+            <label for="title">Keyword:</label>
+            <input type="text" id="title" formControlName="title">
+            <label for="category">Category:</label>
+            <input type="text" id="category" formControlName="category">
+            <label for="ingredient">Ingredient:</label>
+            <input type="text" id="ingredient" formControlName="ingredient">
+            <label for="tags">Tags:</label>
+            <input type="text" id="tags" formControlName="tags">
+            <label for="prepTime">Preparation Time:</label>
+            <input type="text" id="prepTime" formControlName="prepTime">
+            <label for="cookingTime">Cooking Time:</label>
+            <input type="text" id="cookingTime" formControlName="cookingTime">
+            <div class="rp-filter-button">
+                <p-button class="rp-filter-button" (onClick)="filterResults()"
+                label="See Results"></p-button>
+            </div>
+        </fieldset>
+    </form>
+</div>
