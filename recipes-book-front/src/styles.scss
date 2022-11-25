@@ -105,3 +105,63 @@ height: 50px;
 input {
   margin-bottom: 25px;
 }
+
+app-recipe-creation form {
+  padding: 0px 25px 2px 25px;
+  margin-left: 210px;
+  width: 1000px;
+  border: 1px solid lightgray;
+}
+
+
+.column {
+  float: left;
+  width: 33%;
+}
+
+
+.column-middle {
+  float: left;
+  width: 50%;
+
+}
+
+.column-full {
+  float: left;
+  width: 100%;
+
+}
+
+app-recipe-creation input,
+app-recipe-creation label {
+  display: block;
+  width: 100%;
+}
+
+textarea {
+  width: 100%
+}
+
+.recipe-tag {
+  display: initial;
+  padding-left: 10px;
+}
+
+h1 {
+  margin-left: 210px !important;
+  font-size: 1.5rem !important;;
+  margin-top: 10px !important;
+
+
+}
+
+.right-actions-panel {
+  margin-left: 1050px;
+  margin-top: 4px;
+}
+
+.recipe-button button.p-button, .recipe-button .p-button:enabled:active{
+  background: #f71e68 !important;
+  border-color: #f71e68 !important;
+  margin: 5px !important;
+}

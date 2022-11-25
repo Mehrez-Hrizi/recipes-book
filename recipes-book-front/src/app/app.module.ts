@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipesFilterComponent } from './recipes-filter/recipes-filter.component';
+import { RecipeCreationComponent } from './recipe-creation/recipe-creation.component';
+import { RadioButtonModule } from 'primeng/radiobutton'
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { RecipesFilterComponent } from './recipes-filter/recipes-filter.componen
     HeaderComponent,
     HomeComponent,
     RecipesFilterComponent,
+    RecipeCreationComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { RecipesFilterComponent } from './recipes-filter/recipes-filter.componen
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    RadioButtonModule
     
   ],
   providers: [RecipesService],
