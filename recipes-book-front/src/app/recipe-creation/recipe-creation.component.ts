@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { catchError, concatMap, debounceTime, of, tap } from 'rxjs';
 import { Recipe } from '../core/model/recipe.model';
 import * as recipeTags from '../core/model/tags';
 import { RecipesService } from '../core/services/recipes.service';
@@ -27,15 +28,14 @@ export class RecipeCreationComponent implements OnInit {
 
   tags = recipeTags.TAGS;
 
-  ngOnInit(): void {
-    this.recipeForm.valueChanges.subscribe(
-      formValue => {
-        this.service.saveRecipe(formValue).subscribe(
-          result => this.saveSuccess(result)
-        );
-      }
-    );
-  }
+  ngOnInit(): void {}
+  valueCahnges$ = this.recipeForm.valueChanges.pipe(
+    debounceTime(10000),
+    concatMap(
+      formValue => this.service.saveRecipe(formValue)),
+    catchError(errors => of(errors)),
+    tap(result => this.saveSuccess(result))
+  );
 
   saveSuccess(result: Recipe) {
     console.log(result, 'Saved successfully');
