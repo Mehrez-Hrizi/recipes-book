@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, timer } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject, timer } from 'rxjs';
 import { Recipe } from '../model/recipe.model';
-import { catchError, shareReplay, switchMap } from 'rxjs/operators'
+import { catchError, share, shareReplay, switchMap } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 const BASE_PATH = environment.basePath;
 const REFRESH_INTERVAL = 50000;
@@ -44,7 +44,12 @@ export class RecipesService {
         switchMap(_ => {
           return this.http.get<Recipe[]>(`${BASE_PATH}/recipes`);
         }),
-        shareReplay({ bufferSize: 1, refCount: true }),
+        share({
+          connector: () => new ReplaySubject(),
+          resetOnRefCountZero: true,
+          resetOnComplete: true,
+          resetOnError: true
+        }),
         catchError(error => of([]))
       );
     }
